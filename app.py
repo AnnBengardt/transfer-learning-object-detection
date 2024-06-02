@@ -27,6 +27,7 @@ def pretrained_yolov5(device="CPU"):
                 st.write("""Пропуск через Backbone: Извлечение признаков на различных уровнях глубины.""")
                 st.write("""Обработка в Neck: Объединение признаков для усиления детекции.""")
                 st.write("""Предсказание в Head: Генерация боксов, классов и уверенности.""")
+                st.image("data/yolo.jpg")
         with st.expander("Результаты работы модели"):
                 st.image("data/pic1.png")
                 st.image("data/pic2.png")
@@ -66,8 +67,36 @@ def pretrained_yolov5(device="CPU"):
 def custom_yolov5s(device="CPU"):
     st.header('Обученная YOLOv5s на кастомном датасете')
     st.subheader("Датасет: виды перерабатываемого и неперерабатываемого мусора")
-    st.text("В перспективе такую модель можно использовать на мусороперерабатывающий заводе для быстрой сортировки или для дронов, собирающих мусор в природных зонах вроде лесов и океанов.")
     st.image("data/metrcis_screenshot.png", caption="Лосс и метрики обученной модели")
+    with st.expander("Подробнее о пайплайне обучения"):
+                st.write("""YOLOv5s была дообучена на кастомном датасете. Был использован аугментированный и размеченный датасет с сервиса Roboflow с перерабатываемым и неперерабатываемым видами мусора - https://universe.roboflow.com/thanakon21010-gmail-com/waste-gf9v2/dataset/4 . Применённые аугментации:
+* Flip: Horizontal, Vertical
+* 90° Rotate: Clockwise, Counter-Clockwise, Upside Down
+* Crop: 0% Minimum Zoom, 14% Maximum Zoom
+* Rotation: Between -17° and +17°
+* Shear: ±20° Horizontal, ±12° Vertical
+* Grayscale: Apply to 25% of images
+* Hue: Between -29° and +29°
+* Saturation: Between -36% and +36%
+* Brightness: Between -28% and +28%
+* Exposure: Between -25% and +25%
+* Blur: Up to 2px
+* Noise: Up to 3% of pixels""")
+                st.write("""Классы: 
+- Battery:Hazardous waste
+- Bottle:Recycle waste
+- C-vitt_Glass Bottle:Recycle waste
+- Coke:Recycle waste
+- Leaf:Compostable
+- Mama:General waste
+- Mask:Hazardous waste
+- Milo:Recycle waste
+- Ovaltine:Recycle waste
+- Pen:Hazardous waste""")
+                st.write("""В целом, модель работает хорошо, но не все классы хорошо детектируются. Также иногда наблюдаются проблемы с баундинг боксами (либо один объект определяется двумя баундинг боксами, либо границы баундинг бокса некорректны). Но это всё равно неплохой результат для маленькой версии YOLOv5s и не очень долгого цикла обучения (170 эпох) относительно базовой версии модели (500 эпох).""")
+                st.write("---")        
+                st.write("""Были переопределены параметры модели в yaml-конфигурационном файле, а также переиспользован скрипт обучения от создателей модели""")
+                st.image("data/model.jpg") 
     imgpath = glob.glob('data/images/*')
     imgsel = st.slider('Выбрать случайную картинку из тестовой выборки', min_value=1, max_value=len(imgpath), step=1)
     image_file = imgpath[imgsel - 1]
