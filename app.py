@@ -145,7 +145,7 @@ def video_custom_yolov5s():
 
 def main():
 
-    option = st.sidebar.radio("Модель", ['Pretrained YOLOv5m', 'Pretrained YOLOv5m - video','Custom dataset YOLOv5s'])
+    option = st.sidebar.radio("Модель", ['Pretrained YOLOv5m','Custom dataset YOLOv5s'])
 
     st.header('Трансферное обучение для решения задач Object Detection на примере выбранной базовой архитектуры')
     st.subheader("Автор: Марунько Анна МО23-1м")
