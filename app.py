@@ -83,16 +83,16 @@ def custom_yolov5s(device="CPU"):
 * Blur: Up to 2px
 * Noise: Up to 3% of pixels""")
                 st.write("""Классы: 
-- Battery:Hazardous waste
-- Bottle:Recycle waste
-- C-vitt_Glass Bottle:Recycle waste
-- Coke:Recycle waste
-- Leaf:Compostable
-- Mama:General waste
-- Mask:Hazardous waste
-- Milo:Recycle waste
-- Ovaltine:Recycle waste
-- Pen:Hazardous waste""")
+                - Battery Hazardous waste
+                - Bottle Recycle waste
+                - Glass Bottle Recycle waste
+                - Can Recycle waste
+                - Leaf Compostable
+                - Mama General waste
+                - Mask Hazardous waste
+                - Milo Recycle waste
+                - Ovaltine Recycle waste
+                - Pen Hazardous waste""")
                 st.write("""В целом, модель работает хорошо, но не все классы хорошо детектируются. Также иногда наблюдаются проблемы с баундинг боксами (либо один объект определяется двумя баундинг боксами, либо границы баундинг бокса некорректны). Но это всё равно неплохой результат для маленькой версии YOLOv5s и не очень долгого цикла обучения (170 эпох) относительно базовой версии модели (500 эпох).""")
                 st.write("---")        
                 st.write("""Были переопределены параметры модели в yaml-конфигурационном файле, а также переиспользован скрипт обучения от создателей модели""")
