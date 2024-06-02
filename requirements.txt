@@ -31,3 +31,4 @@ thop
 streamlit
 st_btn_select
 wget
+opencv-python-headless
